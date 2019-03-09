@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <property name="DEV_HOME" value="log" />
+
+    <appender name="STDOUT"
+        class="ch.qos.logback.core.ConsoleAppender">
+        <filter
+            class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d [%thread] %-5level %logger{36} - %msg%n
+            </Pattern>
+        </layout>
+    </appender>
+
+    <appender name="FILE-AUDIT"
+        class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter
+            class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <file>${DEV_HOME}/info.log</file>
+        <encoder
+            class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>
+                %d [%thread] %-5level %logger{36} - %msg%n
+            </Pattern>
+        </encoder>
+
+        <rollingPolicy
+            class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${DEV_HOME}/info.%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>30000</maxHistory>
+        </rollingPolicy>
+
+    </appender>
+
+    <appender name="FILE-WARN"
+        class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter
+            class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <file>${DEV_HOME}/warn.log</file>
+        <encoder
+            class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>
+                %d [%thread] %-5level %logger{36} - %msg%n
+            </Pattern>
+        </encoder>
+
+        <rollingPolicy
+            class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${DEV_HOME}/warn.%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>30000</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <!-- <logger name="info-general" level="info" additivity="false"> -->
+    <!-- <appender-ref ref="FILE-AUDIT" /> -->
+    <!-- <appender-ref ref="STDOUT" /> -->
+    <!-- </logger> -->
+
+    <!-- Send logs to both console and file audit -->
+    <!-- <logger name="com.mkyong.web" level="debug" -->
+    <!-- additivity="false"> -->
+    <!-- <appender-ref ref="FILE-AUDIT" /> -->
+    <!-- <appender-ref ref="STDOUT" /> -->
+    <!-- </logger> -->
+
+    <root level="debug">
+        <appender-ref ref="FILE-WARN" />
+        <appender-ref ref="FILE-AUDIT" />
+        <appender-ref ref="STDOUT" />
+    </root>
+
+</configuration>

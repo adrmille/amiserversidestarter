@@ -1,0 +1,31 @@
+# IntelliJ
+.idea/
+*.iws
+*.iml
+*.ipr
+*.ips
+.idea/
+
+# Eclipse
+.settings/
+.metadata/
+.classpath
+.project
+
+#NetBeans
+nb-configuration.xml
+
+# Generated
+target/
+javadoc/
+bin/
+log/
+classes/
+
+# Misc.
+.DS_Store
+*.swp
+*.swo
+
+# Project
+cert.properties
